@@ -29,7 +29,7 @@ const SettingsSelectors = () => {
     newPage: number
   ) => {
     dispatch(setPage(newPage + 1));
-    searchParams.set("page", newPage.toString());
+    searchParams.set("page", (newPage + 1).toString());
 
     const newUrl = `${window.location.pathname}?${searchParams.toString()}`;
     window.history.pushState({ path: newUrl }, "", newUrl);
