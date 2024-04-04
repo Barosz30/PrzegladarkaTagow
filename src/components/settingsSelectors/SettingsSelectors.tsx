@@ -25,7 +25,7 @@ const SettingsSelectors = () => {
   const searchParams = new URLSearchParams(location.search);
 
   const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
+    _event: React.MouseEvent<HTMLButtonElement, MouseEvent> | null,
     newPage: number
   ) => {
     dispatch(setPage(newPage + 1));
@@ -49,7 +49,7 @@ const SettingsSelectors = () => {
   };
 
   const handleChangeOrder = (
-    event: React.MouseEvent<HTMLElement>,
+    _event: React.MouseEvent<HTMLElement>,
     newOrder: "asc" | "desc"
   ) => {
     if (newOrder !== order && newOrder !== null) {
