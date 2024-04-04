@@ -2,11 +2,21 @@ import { Skeleton, Table, TableBody, TableCell, TableContainer, TableHead, Table
 import { useGetTagsQuery } from "../../store/tagApiSlice/tagApiSlice";
 import { Tag } from "../../types/Tag";
 import CustomTableRow from "../customTableRow/CustomTableRow";
-import { TagTableProps } from "../../types/TagTableProps";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { useEffect } from "react";
 
-const TagsTable: React.FC<TagTableProps> = ({ pageSize, page, order }) => {
+const TagsTable = () => {
 
-    const { data: tagsFromServer, isLoading, isError, isFetching } = useGetTagsQuery({page, pageSize, order});
+    const page = useSelector((state: RootState) => state.pageSlice.page);
+    const pageSize = useSelector((state: RootState) => state.pageSlice.tagsPerPage);
+    const order = useSelector((state: RootState) => state.pageSlice.order)
+
+    const { data: tagsFromServer, isLoading, isError, isFetching, refetch } = useGetTagsQuery({page, pageSize, order});
+
+    useEffect(() => {
+      refetch();
+    }, [page, refetch, pageSize, order]) 
 
 
       if (isError) {
